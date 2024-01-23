@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "dist/bot.js",
+  "type": "module",
   "scripts": {
     "dev": "tsx watch src/bot.ts",
     "build": "tsc",

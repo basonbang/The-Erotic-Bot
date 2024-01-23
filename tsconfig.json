@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
       "target": "ES2022",             // Target JavaScript code
-      "module": "CommonJS",           // TS transpiles to CommonJS modules
+      "module": "ESNext",                // TS transpiles to CommonJS modules
       "moduleResolution": "Node",
       "strict": true,
       "noImplicitAny": true,          // Manually specify when setting 'any' type
