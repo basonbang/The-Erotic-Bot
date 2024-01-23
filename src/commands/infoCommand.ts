@@ -1,11 +1,12 @@
 import { CommandInteraction, GuildMember } from 'discord.js';
+import { Command } from '../types';
 
-export const info = {
+export const infoCommand: Command = {
   data : {
     name: 'info',
     description: 'Get information about your user and the server.'
   },
-  async execute(interaction: CommandInteraction) {
+  execute: async (interaction: CommandInteraction) => {
     const member = interaction.member as GuildMember;  // GuildMember object
     const user = interaction.user;    // User object
 

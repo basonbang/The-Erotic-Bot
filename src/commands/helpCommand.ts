@@ -1,11 +1,12 @@
 import { CommandInteraction } from "discord.js"
+import { Command } from "../types";
 
-export const help = {
+export const helpCommand: Command = {
   data: {
     name: 'help',
     description: 'List all available commands!'
   },
-  async execute(interaction: CommandInteraction){
+  execute: async (interaction: CommandInteraction) => {
     const helpMessage = [
       `Here are the available commands!`,
       `/info - Provide information about the user and the server`,

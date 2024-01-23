@@ -1,12 +1,13 @@
 import * as dotenv from 'dotenv';
 import { Client, Collection, REST, Routes } from 'discord.js';
-import { help as helpCommand} from './commands/help.js';
-import { info as infoCommand} from './commands/info.js';
+import { helpCommand } from './commands/helpCommand.js';
+import { infoCommand } from './commands/infoCommand.js';
+import { Command } from './types.js';
 
 dotenv.config();
 
 // Store commands in a Collection 
-const commands = new Collection();
+const commands = new Collection<string, Command>();
 const commandData = [infoCommand.data, helpCommand.data];
 
 const rest = new REST({ version: '10'}).setToken(process.env.TOKEN as string);
@@ -53,8 +54,8 @@ client.on('interactionCreate', async (interaction) => {
     try {
       await command.execute(interaction);
     } catch (error) {
-      console.log(error);
-      await interaction.reply( {content: 'There was an error executing this command!', ephemeral: true})
+      console.log(error);                              // Ephemeral: Messages only visible to user who triggered interaction
+      await interaction.reply( {content: 'There was an error executing this command!', ephemeral: true}) 
     }
   }
 });
