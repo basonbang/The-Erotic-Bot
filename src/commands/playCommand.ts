@@ -1,4 +1,4 @@
-import { CacheType, CommandInteraction, CommandInteractionOptionResolver, GuildMember } from "discord.js";
+import { ApplicationCommandOptionType, CacheType, CommandInteraction, CommandInteractionOptionResolver, GuildMember } from "discord.js";
 import { Command } from "../types";
 import { joinVoiceChannel, createAudioPlayer, createAudioResource, AudioPlayerStatus } from "@discordjs/voice";
 import * as ytdl from "ytdl-core";
@@ -7,14 +7,12 @@ export const playCommand: Command = {
   data: {
     name: 'play',
     description: 'Play audio from any Youtube link!',
-    options: [
-      {
+    options: [{
         name: 'url',
-        type: 'STRING',
+        type: ApplicationCommandOptionType.String,
         description: 'URL of the Youtube video to play',
         required: true
-      }
-    ]
+    }]
   },
   execute: async (interaction: CommandInteraction<CacheType> ) => {
 
@@ -58,6 +56,19 @@ export const playCommand: Command = {
     const player = createAudioPlayer();
 
     // Audio player plays audio until it's finished!
-    
+    player.play(audioResource);
+    connection.subscribe(player);
+
+    player.on(AudioPlayerStatus.Playing, () => {
+      interaction.reply('Now playing!');
+    })
+
+    player.on(AudioPlayerStatus.Idle, () => {
+      connection.destroy(); // Leave voice channel when playback stops
+    })
+
+    player.on('error', error => {
+      console.error(`Error: ${error.message}`);
+    });
   }
 }

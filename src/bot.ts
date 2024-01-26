@@ -2,13 +2,14 @@ import * as dotenv from 'dotenv';
 import { Client, Collection, REST, Routes } from 'discord.js';
 import { helpCommand } from './commands/helpCommand.js';
 import { infoCommand } from './commands/infoCommand.js';
+import { playCommand } from './commands/playCommand.js';
 import { Command } from './types.js';
 
 dotenv.config();
 
 // Store commands in a Collection 
 const commands = new Collection<string, Command>();
-const commandData = [infoCommand.data, helpCommand.data];
+const commandData = [infoCommand.data, helpCommand.data, playCommand.data];
 
 const rest = new REST({ version: '10'}).setToken(process.env.TOKEN as string);
 
@@ -33,6 +34,7 @@ const rest = new REST({ version: '10'}).setToken(process.env.TOKEN as string);
 // Add command modules to the collection
 commands.set(infoCommand.data.name, infoCommand);
 commands.set(helpCommand.data.name, helpCommand);
+commands.set(playCommand.data.name, playCommand);
 
 const client = new Client({
   intents: ['Guilds', 'GuildMessages', 'GuildMembers', 'MessageContent']
@@ -54,7 +56,7 @@ client.on('interactionCreate', async (interaction) => {
     try {
       await command.execute(interaction);
     } catch (error) {
-      console.log(error);                              // Ephemeral: Messages only visible to user who triggered interaction
+      console.log(error);                         // Ephemeral: Messages only visible to user who triggered interaction
       await interaction.reply( {content: 'There was an error executing this command!', ephemeral: true}) 
     }
   }

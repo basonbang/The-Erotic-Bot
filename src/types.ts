@@ -1,4 +1,4 @@
-import { CommandInteraction } from "discord.js";
+import { ApplicationCommandOptionType, CommandInteraction } from "discord.js";
 
 // Defines structure for choices within slash command options
 export interface CommandOptionChoice {
@@ -8,7 +8,7 @@ export interface CommandOptionChoice {
 
 // Defines structure for options that command might have
 export interface CommandOption {
-  type: string;
+  type: ApplicationCommandOptionType
   name: string;
   description: string;
   required?: boolean;
