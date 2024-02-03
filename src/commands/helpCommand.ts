@@ -10,7 +10,8 @@ export const helpCommand: Command = {
     const helpMessage = [
       `Here are the available commands!`,
       `/info - Provide information about the user and the server`,
-      `/help - Displays this message`
+      `/help - Displays this message`,
+      `/play - Plays an inputted Youtube link`
     ].join('\n');
 
     await interaction.reply(helpMessage);

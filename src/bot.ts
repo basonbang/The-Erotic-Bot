@@ -37,7 +37,7 @@ commands.set(helpCommand.data.name, helpCommand);
 commands.set(playCommand.data.name, playCommand);
 
 const client = new Client({
-  intents: ['Guilds', 'GuildMessages', 'GuildMembers', 'MessageContent']
+  intents: ['Guilds', 'GuildMessages', 'GuildMembers', 'MessageContent', 'GuildVoiceStates']
 });
 
 client.once('ready', (c) => {
